@@ -1,6 +1,9 @@
 ## rackspace-downloader
 Quick and dity tool for downloading objects from a Rackspace Object Storage container.
 
+###### Use Case
+This tool was developed to assist in migrating over 350,000 assets from Rackspace to Google Cloud. Resources such as Cyberduck enjoyed crashing when dealing with a large number of objects so I decided to create a CLI application instead.
+
 ###### Installation
 1. `composer install`
 2. `php application "<LOCAL_DESTINATION>" <USERNAME> <PASSWORD> <CONTAINER_NAME>`

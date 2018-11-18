@@ -1,0 +1,11 @@
+{
+    "require": {
+        "rackspace/php-opencloud": "^1.16",
+        "symfony/console": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}

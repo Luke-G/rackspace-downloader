@@ -15,7 +15,8 @@ class DownloadAssets extends Command
         $this->setName('app:download-assets')
               ->addArgument('download_destination')
               ->addArgument('rackspace_username')
-              ->addArgument('rackspace_apikey');
+              ->addArgument('rackspace_apikey')
+              ->addArgument('rackspace_container');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -37,7 +38,7 @@ class DownloadAssets extends Command
         $account = $service->getAccount();
 
         // Access the assets container
-        $container = $service->getContainer('assets');
+        $container = $service->getContainer($input->getArgument('rackspace_container'));
 
         // Access files inside container
         $files = $container->objectList();
@@ -96,7 +97,7 @@ class DownloadAssets extends Command
             // Check if file exists
             if (file_exists($localFilepath)) {                
                 $output->writeln($localFilepath .' already exists');
-                $progressBar->finish();
+                $progressBar->advance();
                 continue;
             }
 

@@ -16,7 +16,8 @@ class DownloadAssets extends Command
               ->addArgument('download_destination')
               ->addArgument('rackspace_username')
               ->addArgument('rackspace_apikey')
-              ->addArgument('rackspace_container');
+              ->addArgument('rackspace_container')
+              ->addArgument('start-marker');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -44,7 +45,9 @@ class DownloadAssets extends Command
         $files = $container->objectList();
 
         $filesList = [];
-        $marker = '';
+
+        $marker = $input->getArgument('start-marker');
+        $output->writeln('Starting from:' . $marker);
 
         $total = (int) $container->getObjectCount(); 
         $output->writeln($total);
@@ -56,22 +59,21 @@ class DownloadAssets extends Command
             $params = [
                 'marker' => $marker,
             ];
-        
+            
+            // $output->writeln($marker);
+
             $objects = $container->objectList($params);
         
             if ($objects->count() == 0) {
                 break;
             }
         
-            foreach ($objects as $object) {        
-                $filesList[] = $object->getName();
+            foreach ($objects as $object) {  
+                $objectName = $object->getName();      
+                $filesList[] = $objectName;
                 $count++;    
         
-                if ($count === $total){
-                    $marker = null;
-                } else {
-                    $marker = $object->getName();        
-                }        
+                $count === $total ? $marker = null : $marker = $objectName;                        
             }        
         }
 

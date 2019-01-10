@@ -1,1 +1,7 @@
 vendor/
+
+# Path to store auth keys, e.g. Google Cloud service acount
+authKeys/
+
+# Environment files
+*.env

@@ -4,10 +4,18 @@
 require __DIR__.'/vendor/autoload.php';
 
 use App\Command\DownloadAssets;
+use App\Command\Upload;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Dotenv\Dotenv;
 
 $application = new Application();
 
 $application->add(new DownloadAssets());
+$application->add(new Upload());
+
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__.'/.env');
 
 $application->run();
+
+

@@ -3,10 +3,10 @@
 
 require __DIR__.'/vendor/autoload.php';
 
-use App\Command\DownloadAssets;
 use App\Command\Upload;
-use Symfony\Component\Console\Application;
+use App\Command\DownloadAssets;
 use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\Console\Application;
 
 $application = new Application();
 

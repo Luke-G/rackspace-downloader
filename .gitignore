@@ -4,4 +4,4 @@ vendor/
 authKeys/
 
 # Environment files
-*.env
+.env

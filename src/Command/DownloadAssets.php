@@ -14,9 +14,6 @@ class DownloadAssets extends Command
     {
         $this->setName('app:download-assets')
               ->addArgument('download_destination')
-              ->addArgument('rackspace_username')
-              ->addArgument('rackspace_apikey')
-              ->addArgument('rackspace_container')
               ->addArgument('start-marker');
     }
 
@@ -29,8 +26,8 @@ class DownloadAssets extends Command
 
         // Create client connection
         $client = new Rackspace(Rackspace::US_IDENTITY_ENDPOINT, array(
-            'username' => $input->getArgument('rackspace_username'),
-            'apiKey'   => $input->getArgument('rackspace_apikey'),
+            'username' => getenv('RACKSPACE_USERNAME'),
+            'apiKey'   => getenv('RACKSPACE_KEY'),
         ));
 
         // Access the storage file service
@@ -39,7 +36,7 @@ class DownloadAssets extends Command
         $account = $service->getAccount();
 
         // Access the assets container
-        $container = $service->getContainer($input->getArgument('rackspace_container'));
+        $container = $service->getContainer(getenv('RACKSPACE_CONTAINER'));
 
         // Access files inside container
         $files = $container->objectList();

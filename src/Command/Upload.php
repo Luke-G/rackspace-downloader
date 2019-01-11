@@ -72,7 +72,7 @@ class Upload extends Command
                         'name' => $filename
                     ]);   
                 } catch (\Exception $e) {
-                    $output->writeln('<error>' . $e->getMessage(0 . '</error>'));
+                    $output->writeln('<error>' . $e->getMessage() . '</error>');
                 }
                 $output->writeln(' Uploaded: ' . $filename);
             } else {

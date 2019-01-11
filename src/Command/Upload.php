@@ -67,10 +67,13 @@ class Upload extends Command
             if (! is_dir($path)) {
                 $output->writeln(' Uploading: ' . $path);
 
-                $bucket->upload(fopen($path, 'r'), [
-                    'name' => $filename
-                ]);   
-                
+                try {
+                    $bucket->upload(fopen($path, 'r'), [
+                        'name' => $filename
+                    ]);   
+                } catch (\Exception $e) {
+                    $output->writelin('<error>' . $e->getMessage(0 . '</error>'));
+                }
                 $output->writeln(' Uploaded: ' . $filename);
             } else {
                 $output->writeln('Skipped ' . $filename . ' as it is a directory');
